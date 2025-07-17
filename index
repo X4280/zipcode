@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZIP Lookup</title>
+  <style>
+    body{display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;background:#f1f5f9}
+    .card{background:#fff;padding:2rem 3rem;border-radius:1rem;box-shadow:0 4px 12px rgba(0,0,0,.1);text-align:center}
+    input{padding:.75rem 1rem;font-size:1rem;border:1px solid #ccc;border-radius:.5rem;width:100%;max-width:220px;margin-bottom:1rem}
+    button{padding:.75rem 1.2rem;font-size:1rem;border:none;border-radius:.5rem;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>ZIP Code Lookup</h1>
+    <input id="zip" placeholder="Enter 5-digit ZIP" />
+    <br />
+    <button onclick="check()">Search</button>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    // ⚡️ Put your ~2 000 ZIP codes here
+    const zipSet = new Set([
+      "73301","75001","75002","75006","75007","75009","75010","75019","75020","75021"
+      /* … */
+    ]);
+
+    function check() {
+      const val = document.getElementById("zip").value.trim();
+      const msg = document.getElementById("msg");
+      if (!/^[0-9]{5}$/.test(val)) {
+        msg.textContent = "Please enter a valid 5-digit ZIP.";
+        msg.style.color = "#d97706"; // amber
+        return;
+      }
+      if (zipSet.has(val)) {
+        msg.textContent = "✅ ZIP code is in the list!";
+        msg.style.color = "#15803d"; // green
+      } else {
+        msg.textContent = "❌ Not in the list.";
+        msg.style.color = "#b91c1c"; // red
+      }
+    }
+  </script>
+</body>
+</html>
